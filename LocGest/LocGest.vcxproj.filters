@@ -30,4 +30,7 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Read.me" />
+  </ItemGroup>
 </Project>

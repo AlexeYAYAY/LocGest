@@ -1,0 +1,37 @@
+- Создать новый проект ExOpenPose отдельно от Папки OpenPose
+- В среде VS2015 выбрать Консольное приложение Win32, чтобы быть написано "stdafx.h" в исходном коде
+- Сначала написать код для проверки код:
+// Command-line user intraface
+#include <openpose/flags.hpp>
+// OpenPose dependencies
+#include <openpose/headers.hpp>
+- Добавить в конфигурацию Дополнительные каталоги включаемых файлов:
+C:\Users\EvgPavenko\Documents\GitHub\openpose\include
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\opencv\include
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\eigen\include
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe\include
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe\include2
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\include
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe3rdparty\include
+- Добавить в конфигурацию Дополнительные зависимости:
+C:\Users\EvgPavenko\Documents\GitHub\openpose\build_windows\src\openpose\Release\openpose.lib
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\opencv\x64\vc14\lib\opencv_world310.lib
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe3rdparty\lib\gflags.lib
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe3rdparty\lib\glog.lib
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe\lib\caffe.lib
+C:\Users\EvgPavenko\Documents\GitHub\openpose\3rdparty\windows\caffe\lib\caffeproto.lib
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\lib\x64\cudart_static.lib
+kernel32.lib
+user32.lib
+gdi32.lib
+winspool.lib
+shell32.lib
+ole32.lib
+oleaut32.lib
+uuid.lib
+comdlg32.lib
+advapi32.lib
+- Копировать OpenPose.dll из C:\Users\EvgPavenko\Documents\GitHub\openpose\build_windows\x64\Release в C:\Users\EvgPavenko\Documents\MyPro\LocGest\x64\Release
+- Копировать все папку GitHub\openpose\models после запуска, чтобы скачать модели, и вставить в ExOpenPose\x64\Release
+- В среде VS 2015 не получить запустить, но в командной строке "C:\Users\EvgPavenko\Documents\MyPro\ExOpenPose\x64\Release ExOpenPose.exe", Получится))))
+- Если нужно изменить модель предсказывания позы и руки, лица, напримрер, COCO или BODY_25. Нужно в flags.hpp найти код "DEFINE_string(model_pose,...."

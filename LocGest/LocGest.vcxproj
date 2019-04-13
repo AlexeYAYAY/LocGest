@@ -155,6 +155,9 @@
     <ClInclude Include="ml.h" />
     <ClInclude Include="OpenPoseWrapper.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Read.me" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
