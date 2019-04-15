@@ -93,6 +93,7 @@ public:
 				cameraSize, FLAGS_camera_parameter_path, FLAGS_frame_undistort, FLAGS_3d_views };
 			opWrapper.configure(wrapperStructInput);
 			// Output (comment or use default argument to disable any output)
+			
 			const op::WrapperStructOutput wrapperStructOutput{
 				FLAGS_cli_verbose, FLAGS_write_keypoint, op::stringToDataFormat(FLAGS_write_keypoint_format),
 				FLAGS_write_json, FLAGS_write_coco_json, FLAGS_write_coco_foot_json, FLAGS_write_coco_json_variant,
@@ -100,6 +101,11 @@ public:
 				FLAGS_write_video_with_audio, FLAGS_write_heatmaps, FLAGS_write_heatmaps_format, FLAGS_write_video_3d,
 				FLAGS_write_video_adam, FLAGS_write_bvh, FLAGS_udp_host, FLAGS_udp_port };
 			opWrapper.configure(wrapperStructOutput);
+			
+			// GUI (comment or use default argument to disable any visual output)
+			const op::WrapperStructGui wrapperStructGui{
+				op::flagsToDisplayMode(FLAGS_display, FLAGS_3d), !FLAGS_no_gui_verbose, FLAGS_fullscreen };
+			opWrapper.configure(wrapperStructGui);
 			if (FLAGS_disable_multi_thread)
 				opWrapper.disableMultiThreading();
 		}
@@ -112,7 +118,7 @@ public:
 	{
 		if (datumsPtr != nullptr && !datumsPtr->empty())
 		{
-			cv::imshow(OPEN_POSE_NAME_AND_VERSION + " - Tutorial C++ API", datumsPtr->at(0)->cvOutputData);
+			cv::imshow(OPEN_POSE_NAME_AND_VERSION, datumsPtr->at(0)->cvOutputData);
 		}
 		else
 			op::log("Nullptr or empty datumsPtr found.", op::Priority::High);
@@ -137,7 +143,7 @@ public:
 			bool userWantsToExit = false;
 			//int i=1;
 			while (!userWantsToExit)
-			{
+			{			    
 				// Pop frame
 				std::shared_ptr<std::vector<std::shared_ptr<op::Datum>>> datumProcessed;
 				if (opWrapper.waitAndPop(datumProcessed))
@@ -151,6 +157,7 @@ public:
 				// Something else happened
 				else
 					op::log("Processed datum could not be emplaced.", op::Priority::High);
+				
 			}
 			op::log("Stopping thread(s)", op::Priority::High);
 			opWrapper.stop();
